@@ -47,11 +47,7 @@ const Layout = ({ children }) => (
                 width: `100%`
               }}
           >
-          <footer style={{position: `fixed`,
-                left: 0,
-                bottom: 0,
-                width: `100%`,
-                marginLeft: `1em`}}>
+          <footer>
             <p>
             © {new Date().getFullYear()}, Built by <a href="https://kwinten.me">Kwinten Delrue</a> with 
             {` `}
