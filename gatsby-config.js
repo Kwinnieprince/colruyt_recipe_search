@@ -1,10 +1,12 @@
 module.exports = {
   siteMetadata: {
+    url: `https://food.kwinten.me`,
     title: `Wat eten we vandaag?`,
     description: `Zoek eten op de website van de colruyt`,
     author: `@kwintenD`,
   },
   plugins: [
+    `gatsby-plugin-cname`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
