@@ -39,7 +39,7 @@ const Layout = ({ children }) => (
             <br/>
             <span style={{fontSize : `xx-small`}}>I am not affiliated in any way with colruyt, use this site on your own risk</span>
             <br/>
-            <span style={{fontSize : `small`}}>Data provided by <a href="https://colruyt.be">Colruyt</a></span>
+            <span style={{fontSize : `xx-small`}}>Data provided by <a href="https://colruyt.be">Colruyt.</a></span>
             </p>
           </footer>
           </div>

@@ -13,6 +13,12 @@ const WeatherData = () => {
         Hoofdgerecht: true,
         Voorgerecht: false,
         Lunch: false,
+    });
+    const[seasonType, setSeasonType] = useState({
+        Zomer: false,
+        Lente: false,
+        Herfst: false,
+        Winter: false,
     })
 
     async function findRandomRecipe(){
@@ -25,7 +31,7 @@ const WeatherData = () => {
                 return json.numberOfResults
             });
         const randomNumber = Math.floor(Math.random() * amountOfRecipes);
-        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=${amountOfRecipes}${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}`)
+        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=${amountOfRecipes}${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}`)
         .then(response => {
             return response.json();
         }).then(json => {
@@ -56,6 +62,22 @@ const WeatherData = () => {
 
     const handleLunchChange = (event) => {
         setRecipeType({Lunch: event.target.checked});
+    }
+
+    const handleZomerChange = (event) => {
+        setSeasonType({Zomer: event.target.checked});
+    }
+
+    const handleLenteChange = (event) => {
+        setSeasonType({Lente: event.target.checked});
+    }
+
+    const handleHerfstChange = (event) => {
+        setSeasonType({Herfst: event.target.checked});
+    }
+
+    const handleWinterChange = (event) => {
+        setSeasonType({Winter: event.target.checked});
     }
 
 
@@ -102,6 +124,34 @@ const WeatherData = () => {
                         labelPlacement="end"
                     />
                 </Box>
+                <Box component="div" mb={2}>
+                    <h4 style={{marginBottom: `0.5em`}}>Kies je seizoen</h4>
+                    <FormControlLabel
+                        value="Lente"
+                        control={<Checkbox color="primary" onChange={handleLenteChange} />}
+                        label="Lente"
+                        labelPlacement="end"
+                        mr={4}
+                    />
+                    <FormControlLabel
+                        value="Zomer"
+                        control={<Checkbox color="primary" onChange={handleZomerChange} />}
+                        label="Zomer"
+                        labelPlacement="end"
+                    />
+                    <FormControlLabel
+                        value="Herfst"
+                        control={<Checkbox color="primary" onChange={handleHerfstChange} />}
+                        label="Herfst"
+                        labelPlacement="end"
+                    />
+                    <FormControlLabel
+                        value="Winter"
+                        control={<Checkbox color="primary" onChange={handleWinterChange} />}
+                        label="Winter"
+                        labelPlacement="end"
+                    />
+                </Box>
                 <Box component="div" mb={4}>
                     <h4>Zoek mijn recept!</h4>
                     <Button variant="contained" color="primary" mb={1} onClick={findRandomRecipe} disabled={disableButton}>
@@ -116,12 +166,14 @@ const WeatherData = () => {
                                 <p> <strong>Titel:</strong> {randomRecipe.title} </p>
                                 <p> <strong>Tijd nodig:</strong> {randomRecipe.timing} </p>
                                 <p> <strong>Porties:</strong> {randomRecipe.serves} </p>
-                                <p> <strong>URL:</strong> <Link href={"https://www.colruyt.be/nl/lekker-koken/"+randomRecipe.title.toLowerCase().split(' ').join('-').split("'").join("").split('è').join('e')}  rel="noreferrer"> https://www.colruyt.be/nl/lekker-koken/{randomRecipe.title.toLowerCase().split(' ').join('-')} </Link></p>
+                                <p> <strong>URL:</strong> <Link href={"https://www.colruyt.be/nl/lekker-koken/"+randomRecipe.title.toLowerCase().split(' ').join('-').split("'").join("").split('è').join('e').split(',').join("")}  rel="noreferrer"> https://www.colruyt.be/nl/lekker-koken/{randomRecipe.title.toLowerCase().split(' ').join('-')} </Link></p>
                             </div>
                         </Grid>
                         <Grid item xs={6}>
                             <div>
-                                <img src={randomRecipe.image}/>
+                                <a href={"https://www.colruyt.be/nl/lekker-koken/"+randomRecipe.title.toLowerCase().split(' ').join('-').split("'").join("").split('è').join('e').split(',').join("")}>
+                                    <img src={randomRecipe.image}/>
+                                </a>
                             </div>
                         </Grid>
                   </Grid>
