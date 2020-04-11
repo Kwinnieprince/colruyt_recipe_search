@@ -171,7 +171,7 @@ const WeatherData = () => {
                     </Box>
                 <Box component="div" mb={4}>
                     <h4>Zoek mijn recept!</h4>
-                    <Button variant="contained" color="primary" mb={1} onClick={findRandomRecipe} disabled={disableButton}>
+                    <Button variant="contained" color="primary" onClick={findRandomRecipe} disabled={disableButton}>
                         Zoek!
                     </Button>
                 </Box>
