@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    url: `https://food.kwinten.me`,
+    siteUrl: `https://food.kwinten.me`,
     title: `Wat eten we vandaag?`,
     description: `Zoek eten op de website van de colruyt`,
     author: `@kwintenD`,
@@ -37,6 +37,6 @@ module.exports = {
     //     // Unique site id
     //     siteId: 'EKLWA'
     //   }
-    },
+    // },
   ],
 }

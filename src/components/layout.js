@@ -57,6 +57,8 @@ const Layout = ({ children }) => (
             {` `}
             <a href="https://www.gatsbyjs.org">Gatsby</a>
             <br/>
+            <span style={{fontSize : `xx-small`}}>I am not affiliated in any way with colruyt, use this site on your own risk</span>
+            <br/>
             <span style={{fontSize : `small`}}>Data provided by <a href="https://colruyt.be">Colruyt</a></span>
             </p>
           </footer>
