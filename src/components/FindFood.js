@@ -66,7 +66,7 @@ const WeatherData = () => {
                     <h4 style={{marginBottom: `0.5em`}}>Kies wat je wilt eten</h4>
                     <FormControlLabel
                         value="Hoofdgerecht"
-                        control={<Checkbox color="primary" checked={recipeType.Hoofdgerecht} onChange={handleHoofdChange} />}
+                        control={<Checkbox color="primary" onChange={handleHoofdChange} />}
                         label="Hoofdgerecht"
                         labelPlacement="end"
                         mr={4}
