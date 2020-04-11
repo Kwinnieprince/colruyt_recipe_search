@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import {Checkbox, Container, Button, Box, FormControlLabel, Grid, Link, Switch} from '@material-ui/core'
+import {Container, Button, Box, FormControlLabel, Grid, Link, Switch, Radio, RadioGroup} from '@material-ui/core'
 
 const WeatherData = () => {
 
     const[randomRecipe, setRandomRecipe] = useState();
     const[disableButton, setDisableButton] = useState(false);
-    const[disableVegetarian, setDisableVegetarian] = useState(false)
     const[recipeType, setRecipeType] = useState({
         Tussendoortje: false,
         Bijgerecht: false,
@@ -20,7 +19,7 @@ const WeatherData = () => {
         Herfst: false,
         Winter: false,
     })
-    const[vegetarian, setVegetarian] = useState();
+    const[vegetarian, setVegetarian] = useState(false);
 
     async function findRandomRecipe(){
         setDisableButton(true);
@@ -82,7 +81,6 @@ const WeatherData = () => {
     }
 
     const handleVegetarianChange = (event) => {
-        // setDisableVegetarian(event.target.checked)
         setVegetarian(event.target.checked);
     }
 
@@ -92,71 +90,75 @@ const WeatherData = () => {
             <Container>
                 <Box component="div" mb={2}>
                     <h4 style={{marginBottom: `0.5em`}}>Kies wat je wilt eten</h4>
-                    <FormControlLabel
-                        value="Hoofdgerecht"
-                        control={<Checkbox color="primary" onChange={handleHoofdChange} disabled={disableVegetarian} />}
-                        label="Hoofdgerecht"
-                        labelPlacement="end"
-                        mr={4}
-                    />
-                    <FormControlLabel
-                        value="Tussendoortje"
-                        control={<Checkbox color="primary" onChange={handleTussenChange} disabled={disableVegetarian} />}
-                        label="Tussendoortje"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Bijgerecht"
-                        control={<Checkbox color="primary" onChange={handleBijChange} disabled={disableVegetarian} />}
-                        label="Bijgerecht"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Aperitiefhapje"
-                        control={<Checkbox color="primary" onChange={handleAperoChange} disabled={disableVegetarian} />}
-                        label="Aperitiefhapje"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Voorgerecht"
-                        control={<Checkbox color="primary" onChange={handleVoorChange} disabled={disableVegetarian} />}
-                        label="Voorgerecht"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Lunch"
-                        control={<Checkbox color="primary" onChange={handleLunchChange} disabled={disableVegetarian} />}
-                        label="Lunch"
-                        labelPlacement="end"
-                    />
+                    <RadioGroup row aria-label="position">
+                        <FormControlLabel
+                            value="Hoofdgerecht"
+                            control={<Radio color="primary" onChange={handleHoofdChange} />}
+                            label="Hoofdgerecht"
+                            labelPlacement="end"
+                            mr={4}
+                        />
+                        <FormControlLabel
+                            value="Tussendoortje"
+                            control={<Radio color="primary" onChange={handleTussenChange} />}
+                            label="Tussendoortje"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Bijgerecht"
+                            control={<Radio color="primary" onChange={handleBijChange} />}
+                            label="Bijgerecht"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Aperitiefhapje"
+                            control={<Radio color="primary" onChange={handleAperoChange} />}
+                            label="Aperitiefhapje"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Voorgerecht"
+                            control={<Radio color="primary" onChange={handleVoorChange} />}
+                            label="Voorgerecht"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Lunch"
+                            control={<Radio color="primary" onChange={handleLunchChange} />}
+                            label="Lunch"
+                            labelPlacement="end"
+                        />
+                    </RadioGroup>
                 </Box>
                 <Box component="div" mb={2}>
                     <h4 style={{marginBottom: `0.5em`}}>Kies je seizoen</h4>
-                    <FormControlLabel
-                        value="Lente"
-                        control={<Checkbox color="primary" onChange={handleLenteChange} />}
-                        label="Lente"
-                        labelPlacement="end"
-                        mr={4}
-                    />
-                    <FormControlLabel
-                        value="Zomer"
-                        control={<Checkbox color="primary" onChange={handleZomerChange} />}
-                        label="Zomer"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Herfst"
-                        control={<Checkbox color="primary" onChange={handleHerfstChange} />}
-                        label="Herfst"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="Winter"
-                        control={<Checkbox color="primary" onChange={handleWinterChange} />}
-                        label="Winter"
-                        labelPlacement="end"
-                    />
+                    <RadioGroup row aria-label="position">
+                        <FormControlLabel
+                            value="Lente"
+                            control={<Radio color="primary" onChange={handleLenteChange}/>}
+                            label="Lente"
+                            labelPlacement="end"
+                            mr={4}
+                        />
+                        <FormControlLabel
+                            value="Zomer"
+                            control={<Radio color="primary" onChange={handleZomerChange}/>}
+                            label="Zomer"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Herfst"
+                            control={<Radio color="primary" onChange={handleHerfstChange}/>}
+                            label="Herfst"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Winter"
+                            control={<Radio color="primary" onChange={handleWinterChange}/>}
+                            label="Winter"
+                            labelPlacement="end"
+                        />
+                    </RadioGroup>
                 </Box>
                 <Box component="div" mb={2}>
                     <h4 style={{marginBottom: `0.5em`}}>Eet je vegetarisch?</h4>

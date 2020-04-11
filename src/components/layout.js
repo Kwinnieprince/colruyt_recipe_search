@@ -31,7 +31,7 @@ const Layout = ({ children }) => (
           }}
         >
           <main>{children}</main>
-          <footer>
+          <footer style={{fontSize : `small`}}>
             <p>
             © {new Date().getFullYear()}, Built by <a href="https://kwinten.me">Kwinten Delrue</a> with 
             {` `}
