@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import {Checkbox, Container, Button, Box, FormControlLabel, Grid, Link} from '@material-ui/core'
+import {Checkbox, Container, Button, Box, FormControlLabel, Grid, Link, Switch} from '@material-ui/core'
 
 const WeatherData = () => {
 
     const[randomRecipe, setRandomRecipe] = useState();
-    const[recipeURL, setRandomRecipeURL] = useState("");
     const[disableButton, setDisableButton] = useState(false);
+    const[disableVegetarian, setDisableVegetarian] = useState(false)
     const[recipeType, setRecipeType] = useState({
         Tussendoortje: false,
         Bijgerecht: false,
         Aperitiefhapje: false,
-        Hoofdgerecht: true,
+        Hoofdgerecht: false,
         Voorgerecht: false,
         Lunch: false,
     });
@@ -20,10 +20,11 @@ const WeatherData = () => {
         Herfst: false,
         Winter: false,
     })
+    const[vegetarian, setVegetarian] = useState();
 
     async function findRandomRecipe(){
         setDisableButton(true);
-        const amountOfRecipes = await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}`)
+        const amountOfRecipes = await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1&page=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}`)
         .then(response => {
             return response.json();
         }).then(
@@ -31,7 +32,7 @@ const WeatherData = () => {
                 return json.numberOfResults
             });
         const randomNumber = Math.floor(Math.random() * amountOfRecipes);
-        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=${amountOfRecipes}${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}`)
+        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}&size=${amountOfRecipes}&page=1`)
         .then(response => {
             return response.json();
         }).then(json => {
@@ -80,6 +81,11 @@ const WeatherData = () => {
         setSeasonType({Winter: event.target.checked});
     }
 
+    const handleVegetarianChange = (event) => {
+        // setDisableVegetarian(event.target.checked)
+        setVegetarian(event.target.checked);
+    }
+
 
     return(
         <>
@@ -88,38 +94,38 @@ const WeatherData = () => {
                     <h4 style={{marginBottom: `0.5em`}}>Kies wat je wilt eten</h4>
                     <FormControlLabel
                         value="Hoofdgerecht"
-                        control={<Checkbox color="primary" onChange={handleHoofdChange} />}
+                        control={<Checkbox color="primary" onChange={handleHoofdChange} disabled={disableVegetarian} />}
                         label="Hoofdgerecht"
                         labelPlacement="end"
                         mr={4}
                     />
                     <FormControlLabel
                         value="Tussendoortje"
-                        control={<Checkbox color="primary" onChange={handleTussenChange} />}
+                        control={<Checkbox color="primary" onChange={handleTussenChange} disabled={disableVegetarian} />}
                         label="Tussendoortje"
                         labelPlacement="end"
                     />
                     <FormControlLabel
                         value="Bijgerecht"
-                        control={<Checkbox color="primary" onChange={handleBijChange} />}
+                        control={<Checkbox color="primary" onChange={handleBijChange} disabled={disableVegetarian} />}
                         label="Bijgerecht"
                         labelPlacement="end"
                     />
                     <FormControlLabel
                         value="Aperitiefhapje"
-                        control={<Checkbox color="primary" onChange={handleAperoChange} />}
+                        control={<Checkbox color="primary" onChange={handleAperoChange} disabled={disableVegetarian} />}
                         label="Aperitiefhapje"
                         labelPlacement="end"
                     />
                     <FormControlLabel
                         value="Voorgerecht"
-                        control={<Checkbox color="primary" onChange={handleVoorChange} />}
+                        control={<Checkbox color="primary" onChange={handleVoorChange} disabled={disableVegetarian} />}
                         label="Voorgerecht"
                         labelPlacement="end"
                     />
                     <FormControlLabel
                         value="Lunch"
-                        control={<Checkbox color="primary" onChange={handleLunchChange} />}
+                        control={<Checkbox color="primary" onChange={handleLunchChange} disabled={disableVegetarian} />}
                         label="Lunch"
                         labelPlacement="end"
                     />
@@ -152,6 +158,15 @@ const WeatherData = () => {
                         labelPlacement="end"
                     />
                 </Box>
+                <Box component="div" mb={2}>
+                    <h4 style={{marginBottom: `0.5em`}}>Eet je vegetarisch?</h4>
+                    <FormControlLabel
+                        value="Vegetarisch"
+                        control={<Switch color="primary" checked={vegetarian} onChange={handleVegetarianChange} />}
+                        label="Vegetarisch"
+                        labelPlacement="end"
+                        />
+                    </Box>
                 <Box component="div" mb={4}>
                     <h4>Zoek mijn recept!</h4>
                     <Button variant="contained" color="primary" mb={1} onClick={findRandomRecipe} disabled={disableButton}>
