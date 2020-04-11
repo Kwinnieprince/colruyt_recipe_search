@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: `https://food.kwinten.me`,
     title: `Wat eten we vandaag?`,
-    description: `Zoek eten op de website van de colruyt`,
+    description: `Weet je niet wat eten? Deze website kiest een gerecht van de colruyt uit voor jou!`,
     author: `@kwintenD`,
   },
   plugins: [
