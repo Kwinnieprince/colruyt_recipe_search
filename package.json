@@ -12,6 +12,7 @@
     "gatsby-image": "^2.2.37",
     "gatsby-plugin-cname": "^1.0.0",
     "gatsby-plugin-fathom": "^1.2.0",
+    "gatsby-plugin-google-analytics": "^2.2.2",
     "gatsby-plugin-manifest": "^2.1.1",
     "gatsby-plugin-offline": "^2.2.10",
     "gatsby-plugin-react-helmet": "^3.1.18",
