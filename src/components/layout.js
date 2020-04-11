@@ -2,7 +2,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql, Link } from "gatsby"
-import StickyFooter from 'react-sticky-footer';
 
 import Header from "./header"
 import "./layout.css"
@@ -32,21 +31,6 @@ const Layout = ({ children }) => (
           }}
         >
           <main>{children}</main>
-          <StickyFooter
-              bottomThreshold={90}
-              normalStyles={{
-                position: `fixed`,
-                left: 0,
-                bottom: 0,
-                width: `100%`
-              }}
-              stickyStyles={{
-                position: `fixed`,
-                left: 0,
-                bottom: 0,
-                width: `100%`
-              }}
-          >
           <footer>
             <p>
             © {new Date().getFullYear()}, Built by <a href="https://kwinten.me">Kwinten Delrue</a> with 
@@ -58,7 +42,6 @@ const Layout = ({ children }) => (
             <span style={{fontSize : `small`}}>Data provided by <a href="https://colruyt.be">Colruyt</a></span>
             </p>
           </footer>
-          </StickyFooter>
           </div>
       </>
     )}

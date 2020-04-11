@@ -627,8 +627,11 @@ pre tt:after {
   html {
     font-size: 100%;
   }
-  footer {
+  /* footer {
     position: initial;
     display: inline;
+  } */
+  footer {
+    z-index: -2;
   }
 }
