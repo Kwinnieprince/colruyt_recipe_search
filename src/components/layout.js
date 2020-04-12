@@ -2,6 +2,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql, Link } from "gatsby"
+import GitHubButton from 'react-github-btn'
+
 
 import Header from "./header"
 import "./layout.css"
@@ -40,6 +42,8 @@ const Layout = ({ children }) => (
             <span style={{fontSize : `xx-small`}}>I am not affiliated in any way with colruyt, use this site on your own risk</span>
             <br/>
             <span style={{fontSize : `xx-small`}}>Data provided by <a href="https://colruyt.be">Colruyt.</a></span>
+            <br/>
+            <GitHubButton href="https://github.com/kwinnieprince/colruyt_recipe_search" data-color-scheme="no-preference: dark; light: dark; dark: dark;" aria-label="Star kwinnieprince/colruyt_recipe_search on GitHub">Star</GitHubButton>
             </p>
           </footer>
           </div>
