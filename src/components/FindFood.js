@@ -21,19 +21,20 @@ const WeatherData = () => {
         Winter: false,
     })
     const[vegetarian, setVegetarian] = useState(false);
-    const[koolhydraten, setKoolhydraten] = useState(false);
 
     async function findRandomRecipe(){
         setDisableButton(true);
-        const amountOfRecipes = await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1&page=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}`)
+        const fetchURLGetReceipes=`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1&page=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}`;
+        const amountOfRecipes = await fetch(fetchURLGetReceipes)
         .then(response => {
             return response.json();
         }).then(
             json => {
                 return json.numberOfResults
             });
+        const fetchURL=`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}&size=${amountOfRecipes}&page=1`;
         const randomNumber = Math.floor(Math.random() * amountOfRecipes);
-        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}&size=${amountOfRecipes}&page=1`)
+        await fetch(fetchURL)
         .then(response => {
             return response.json();
         }).then(json => {
@@ -135,7 +136,7 @@ const WeatherData = () => {
                         />
                         <FormControlLabel
                             value="Salade"
-                            control={<Radio color="primary" onChange={handleSaladChange} />}
+                            control={<Radio color="primary" onChange={handleSaladChange}  />}
                             label="Salade"
                             labelPlacement="end"
                         />
@@ -146,26 +147,26 @@ const WeatherData = () => {
                     <RadioGroup row aria-label="position">
                         <FormControlLabel
                             value="Lente"
-                            control={<Radio color="primary" onChange={handleLenteChange}/>}
+                            control={<Radio color="primary" checked={seasonType.Lente} onChange={handleLenteChange} />}
                             label="Lente"
                             labelPlacement="end"
                             mr={4}
                         />
                         <FormControlLabel
                             value="Zomer"
-                            control={<Radio color="primary" onChange={handleZomerChange}/>}
+                            control={<Radio color="primary" checked={seasonType.Zomer} onChange={handleZomerChange} />}
                             label="Zomer"
                             labelPlacement="end"
                         />
                         <FormControlLabel
                             value="Herfst"
-                            control={<Radio color="primary" onChange={handleHerfstChange}/>}
+                            control={<Radio color="primary" checked={seasonType.Herfst} onChange={handleHerfstChange} />}
                             label="Herfst"
                             labelPlacement="end"
                         />
                         <FormControlLabel
                             value="Winter"
-                            control={<Radio color="primary" onChange={handleWinterChange}/>}
+                            control={<Radio color="primary" checked={seasonType.Winter} onChange={handleWinterChange} />}
                             label="Winter"
                             labelPlacement="end"
                         />
@@ -175,7 +176,7 @@ const WeatherData = () => {
                     <h4 style={{marginBottom: `0.5em`}}>Eet je vegetarisch?</h4>
                     <FormControlLabel
                         value="Vegetarisch"
-                        control={<Switch color="primary" checked={vegetarian} onChange={handleVegetarianChange} />}
+                        control={<Switch color="primary" checked={vegetarian} onChange={handleVegetarianChange}  />}
                         label="Vegetarisch"
                         labelPlacement="end"
                         />

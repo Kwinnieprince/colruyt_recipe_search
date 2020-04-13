@@ -32,8 +32,8 @@ const Layout = ({ children }) => (
             height: `100%`,
           }}
         >
-          <main>{children}</main>
-          <footer style={{fontSize : `small`}}>
+          <main style={{zIndex: 1500}}>{children}</main>
+          <footer style={{fontSize : `small`, zIndex: 900}}>
             <p>
             © {new Date().getFullYear()}, Built by <a href="https://kwinten.me">Kwinten Delrue</a> with 
             {` `}
