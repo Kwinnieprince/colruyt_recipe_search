@@ -41,7 +41,7 @@ const Layout = ({ children }) => (
             <span style={{display: `block`}}></span>
             <span style={{fontSize : `xx-small`, lineHeight: `5px`}}>I am not affiliated in any way with colruyt, use this site on your own risk</span>
             <span style={{display: `block`}}></span>
-            <span style={{fontSize : `xx-small`}}>Data provided by <a href="https://colruyt.be">Colruyt.</a></span>
+            <span style={{fontSize : `xx-small`}}>Data comes from <a href="https://colruyt.be">Colruyt.</a></span>
             <span style={{display: `block`}}></span>
             <GitHubButton href="https://github.com/kwinnieprince/colruyt_recipe_search" data-color-scheme="no-preference: dark; light: dark; dark: dark;" aria-label="Star kwinnieprince/colruyt_recipe_search on GitHub">Star</GitHubButton>
             </p>
