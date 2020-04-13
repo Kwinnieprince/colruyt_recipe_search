@@ -12,6 +12,7 @@ const WeatherData = () => {
         Hoofdgerecht: false,
         Voorgerecht: false,
         Lunch: false,
+        Salad: false,
     });
     const[seasonType, setSeasonType] = useState({
         Zomer: false,
@@ -20,10 +21,11 @@ const WeatherData = () => {
         Winter: false,
     })
     const[vegetarian, setVegetarian] = useState(false);
+    const[koolhydraten, setKoolhydraten] = useState(false);
 
     async function findRandomRecipe(){
         setDisableButton(true);
-        const amountOfRecipes = await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1&page=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}`)
+        const amountOfRecipes = await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair&size=1&page=1${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}`)
         .then(response => {
             return response.json();
         }).then(
@@ -31,7 +33,7 @@ const WeatherData = () => {
                 return json.numberOfResults
             });
         const randomNumber = Math.floor(Math.random() * amountOfRecipes);
-        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}&size=${amountOfRecipes}&page=1`)
+        await fetch(`https://ecgrecipemw.colruyt.be/ecgrecipemw/nl/v1/recipes?application=Colruyt+Culinair${recipeType.Hoofdgerecht?"&menu=Hoofdgerecht":""}${recipeType.Tussendoortje?"&menu=Tussendoortje":""}${recipeType.Bijgerecht?"&menu=Bijgerecht":""}${recipeType.Aperitiefhapje?"&menu=Aperitiefhapje":""}${recipeType.Voorgerecht?"&menu=Voorgerecht":""}${recipeType.Lunch?"&menu=Lunch":""}${recipeType.Salad?"&preparationType=Salade":""}${seasonType.Zomer?"&seasons=zomer":""}${seasonType.Herfst?"&seasons=herfst":""}${seasonType.Lente?"&seasons=lente":""}${seasonType.Winter?"&seasons=winter":""}${vegetarian?"&recipeType=Vegetarisch":""}&size=${amountOfRecipes}&page=1`)
         .then(response => {
             return response.json();
         }).then(json => {
@@ -64,6 +66,10 @@ const WeatherData = () => {
         setRecipeType({Lunch: event.target.checked});
     }
 
+    const handleSaladChange = (event) => {
+        setRecipeType({Salad: event.target.checked});
+    }
+
     const handleZomerChange = (event) => {
         setSeasonType({Zomer: event.target.checked});
     }
@@ -84,10 +90,9 @@ const WeatherData = () => {
         setVegetarian(event.target.checked);
     }
 
-
     return(
         <>
-            <Container>
+            <Container style={{padding: 0}}>
                 <Box component="div" mb={2}>
                     <h4 style={{marginBottom: `0.5em`}}>Kies wat je wilt eten</h4>
                     <RadioGroup row aria-label="position">
@@ -126,6 +131,12 @@ const WeatherData = () => {
                             value="Lunch"
                             control={<Radio color="primary" onChange={handleLunchChange} />}
                             label="Lunch"
+                            labelPlacement="end"
+                        />
+                        <FormControlLabel
+                            value="Salade"
+                            control={<Radio color="primary" onChange={handleSaladChange} />}
+                            label="Salade"
                             labelPlacement="end"
                         />
                     </RadioGroup>
