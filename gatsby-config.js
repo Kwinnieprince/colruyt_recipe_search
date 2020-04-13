@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: `https://food.kwinten.me`,
     title: `Wat eten we vandaag?`,
-    description: `Weet je niet wat eten? Deze website kiest een gerecht van de colruyt uit voor jou!`,
+    description: `Weet je echt niet wat te eten vandaag of is de vraag weer: Wat eten we vandaag? kies wat voor soort eten je wilt eten, het seizoen waarin je eten wilt, of je vegetarisch wilt eten of niet en dan wordt een recept gekozen zodat je geen keuzestress meer moet hebben!`,
     author: `@kwintenD`,
   },
   plugins: [
