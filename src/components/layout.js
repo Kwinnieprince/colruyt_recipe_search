@@ -3,6 +3,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql, Link } from "gatsby"
 import GitHubButton from 'react-github-btn'
+import posthog from "gatsby-plugin-posthog-analytics"
 
 
 import Header from "./header"
